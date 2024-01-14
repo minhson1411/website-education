@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% block title %} Profile {% endblock %}
+{% block content %}
+
+<!-- PAGE TITLE
+    ================================================== -->
+    <header class="py-8 py-md-11" style="background-image: none;">
+        <div class="container text-center py-xl-2">
+            <h1 class="display-4 fw-semi-bold mb-0">Cập nhật thông tin</h1>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb breadcrumb-scroll justify-content-center">
+                    <li class="breadcrumb-item">
+                        <a class="text-gray-800" href="#">
+                            Trang chủ
+                        </a>
+                    </li>
+                    <li class="breadcrumb-item text-gray-800 active" aria-current="page">
+                        Cập nhật thông tin
+                    </li>
+                </ol>
+            </nav>
+        </div>
+        <!-- Img -->
+        <img class="d-none img-fluid" src="...html" alt="...">
+    </header>
+    <!-- Card -->
+            <div class="card" style="width:80%;margin-left:10%;">
+            {% include 'components/msg.html' %}
+                <br>
+              <div class="card-body" >
+
+                <form method="post" action="{% url 'profile_update' %}">
+                    {% csrf_token %}
+                  <div class="row">
+                        <div class="col">
+                            <div class="form-group mb-4">
+                              <label>Họ</label>
+                             <input type="text" class="form-control"  name="first_name" value="{{ user.first_name }}">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-group mb-4">
+                              <label>Tên</label>
+                              <input type="text" class="form-control"  name="last_name" value="{{ user.last_name }}">
+                            </div>
+                        </div>
+                        <div class="w-100"></div>
+                        <div class="col">
+                             <div class="form-group mb-4">
+                                <label>Email</label>
+                                <input type="email" class="form-control" name="email" value="{{ user.email }}" readonly>
+                             </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-group mb-4">
+                               <label>Tên tài khoản</label>
+                               <input type="text" class="form-control"  name="username" value="{{ user.username }}" readonly>
+                            </div>
+                        </div>
+                      <div class="col-12">
+                            <div class="form-group mb-4">
+                               <label>Mật khẩu</label>
+                               <input type="password" class="form-control" placeholder="Nhập nếu bạn muốn đổi mật khẩu  " name="password">
+                            </div>
+                        </div>
+                  </div>
+                  <button type="submit" class="btn btn-primary">Cập nhật </button>
+                </form>
+
+              </div>
+            </div>
+{% endblock %}

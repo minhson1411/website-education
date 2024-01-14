@@ -1,0 +1,56 @@
+{% extends 'base.html' %} 
+{% block title %} {{ test.title }} {% endblock %} 
+{% block content %}
+
+  <div class="container d-flex justify-content-center">
+    <div class="w-75">
+    <h1>{{test.title}}</h1>
+    <p>Duration: {{test.time}}:00</p>
+    <form method="post" action="{% url 'submit_test' test.id %}"> 
+      {% csrf_token %} 
+      <div>
+        {% for question in test.question_set.all %}
+        <div>
+          <p class="fw-bold mt-5">{{question.question}}</p>
+          <div>
+            <input
+              type="radio"
+              id="option1_{{ question.id }}"
+              name="question_{{ question.id }}"
+              value="{{question.option1}}"
+            />
+            <label for="option1">{{question.option1}}</label><br />
+            <input
+              type="radio"
+              id="option2_{{ question.id }}"
+              name="question_{{ question.id }}"
+              value="{{question.option2}}"
+            />
+            <label for="option2">{{question.option2}}</label><br />
+            <input
+              type="radio"
+              id="option3_{{ question.id }}"
+              name="question_{{ question.id }}"
+              value="{{question.option3}}"
+            />
+            <label for="option3">{{question.option3}}</label><br />
+            <input
+              type="radio"
+              id="option4_{{ question.id }}"
+              name="question_{{ question.id }}"
+              value="{{question.option4}}"
+            />
+            <label for="option4">{{question.option4}}</label><br />
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+      <div class="d-flex justify-content-around align-content-center mb-5 mt-5">
+          <button type="submit" class="btn btn-primary px-3 py-1">Submit</button>
+          <a href="/course/{{test.course.slug}}" class="btn btn-danger px-3 py-1">Cancel</a>
+      </div>
+      </div>
+  </div>
+  
+
+{% endblock %}
